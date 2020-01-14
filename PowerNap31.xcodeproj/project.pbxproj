@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		6D85CE3C23CE2B93006DC06C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D85CE3B23CE2B93006DC06C /* AppDelegate.swift */; };
 		6D85CE3E23CE2B93006DC06C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D85CE3D23CE2B93006DC06C /* SceneDelegate.swift */; };
-		6D85CE4023CE2B93006DC06C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D85CE3F23CE2B93006DC06C /* ViewController.swift */; };
 		6D85CE4323CE2B93006DC06C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D85CE4123CE2B93006DC06C /* Main.storyboard */; };
 		6D85CE4523CE2B96006DC06C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D85CE4423CE2B96006DC06C /* Assets.xcassets */; };
 		6D85CE4823CE2B96006DC06C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D85CE4623CE2B96006DC06C /* LaunchScreen.storyboard */; };
+		6D85CE5023CE2C00006DC06C /* TimerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D85CE4F23CE2C00006DC06C /* TimerController.swift */; };
+		6D85CE5223CE30D2006DC06C /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D85CE5123CE30D2006DC06C /* TimerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6D85CE3823CE2B93006DC06C /* PowerNap31.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PowerNap31.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D85CE3B23CE2B93006DC06C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D85CE3D23CE2B93006DC06C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6D85CE3F23CE2B93006DC06C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6D85CE4223CE2B93006DC06C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6D85CE4423CE2B96006DC06C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D85CE4723CE2B96006DC06C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6D85CE4923CE2B96006DC06C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D85CE4F23CE2C00006DC06C /* TimerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerController.swift; sourceTree = "<group>"; };
+		6D85CE5123CE30D2006DC06C /* TimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +60,12 @@
 			children = (
 				6D85CE3B23CE2B93006DC06C /* AppDelegate.swift */,
 				6D85CE3D23CE2B93006DC06C /* SceneDelegate.swift */,
-				6D85CE3F23CE2B93006DC06C /* ViewController.swift */,
 				6D85CE4123CE2B93006DC06C /* Main.storyboard */,
 				6D85CE4423CE2B96006DC06C /* Assets.xcassets */,
 				6D85CE4623CE2B96006DC06C /* LaunchScreen.storyboard */,
 				6D85CE4923CE2B96006DC06C /* Info.plist */,
+				6D85CE4F23CE2C00006DC06C /* TimerController.swift */,
+				6D85CE5123CE30D2006DC06C /* TimerViewController.swift */,
 			);
 			path = PowerNap31;
 			sourceTree = "<group>";
@@ -138,7 +141,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D85CE4023CE2B93006DC06C /* ViewController.swift in Sources */,
+				6D85CE5223CE30D2006DC06C /* TimerViewController.swift in Sources */,
+				6D85CE5023CE2C00006DC06C /* TimerController.swift in Sources */,
 				6D85CE3C23CE2B93006DC06C /* AppDelegate.swift in Sources */,
 				6D85CE3E23CE2B93006DC06C /* SceneDelegate.swift in Sources */,
 			);
