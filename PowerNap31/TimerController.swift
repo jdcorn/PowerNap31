@@ -36,7 +36,6 @@ class TimerController {
             DispatchQueue.main.async {
                 self.secondTick()
                 self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { (_) in self.secondTick()
-                    
                 })
             }
         }
@@ -46,9 +45,11 @@ class TimerController {
         guard let timeRemaining = timeRemaining else { return }
         if timeRemaining > 0 {
             self.timeRemaining = timeRemaining - 1
+            delegate?.timerSecondTick()
         } else {
             timer?.invalidate()
             self.timeRemaining = nil
+            delegate?.timerCompleted()
         }
     }
     
@@ -56,6 +57,7 @@ class TimerController {
         if isOn == true {
             timeRemaining = nil
             timer?.invalidate()
+            delegate?.timerStopped()
         }
     }
     
