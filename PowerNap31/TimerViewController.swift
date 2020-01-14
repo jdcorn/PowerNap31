@@ -12,6 +12,7 @@ class TimerViewController: UIViewController {
     
     // MARK: - Properties
     let myTimer = TimerController()
+    fileprivate let userNotificationIdentifier = "timerNotification"
     
     // MARK: - Outlets
     @IBOutlet weak var timerLabel: UILabel!
@@ -28,8 +29,10 @@ class TimerViewController: UIViewController {
     @IBAction func startButtonTapped(_ sender: Any) {
         if myTimer.isOn {
             myTimer.stopTimer()
+            timerStopped()
         } else {
-        myTimer.startTimer(10)
+            myTimer.startTimer(10)
+            scheduleNotification()
         }
         updateViews()
     }
@@ -48,6 +51,76 @@ class TimerViewController: UIViewController {
         timerLabel.text = myTimer.timeRemainingAsString()
     }
     
+    func resetTimer() {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { (requests) in
+            let timerLocalNotificationRequest = requests.filter({ $0.identifier == self.userNotificationIdentifier})
+            guard let timerNotificationRequest = timerLocalNotificationRequest.last,
+                let trigger = timerNotificationRequest.trigger as? UNCalendarNotificationTrigger,
+                let fireDate = trigger.nextTriggerDate()
+                else { return }
+            
+            self.myTimer.stopTimer()
+            self.myTimer.startTimer(fireDate.timeIntervalSinceNow)
+        }
+    }
+    
+    // Creates the popup window, how it looks
+    func setupAlertController() {
+        var snoozeTextField: UITextField?
+        let alert = UIAlertController(title: "Wake up", message: "or keep snoozing?", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.placeholder = "Choose how long to snooze"
+            textField.keyboardType = .numberPad
+            snoozeTextField = textField
+            
+        }
+        
+        // snooze button
+        let snoozeAction = UIAlertAction(title: "Snooze", style: .default) { (_) in
+            guard let snoozeTimeText = snoozeTextField?.text,
+                let time = TimeInterval(snoozeTimeText)
+                else { return }
+            
+            self.myTimer.startTimer(time)
+            self.updateViews()
+        }
+        
+        // cancel button
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel) { (_) in
+            self.updateViews()
+        }
+        
+        alert.addAction(snoozeAction)
+        alert.addAction(dismissAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // lock screen notification
+    func scheduleNotification() {
+        
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = "wakey wakey"
+        notificationContent.body = "eggs and bakey"
+        
+        guard let timeRemaining = myTimer.timeRemaining else { return }
+        let fireDate = Date(timeInterval: timeRemaining, since: Date())
+        let dateComponents = Calendar.current.dateComponents([.minute, .second], from: fireDate)
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: userNotificationIdentifier, content: notificationContent, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { (error) in
+            if error != nil {
+                print("error")
+            }
+        }
+    }
+    
+    func cancelNotification() {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [userNotificationIdentifier])
+    }
+    
 }
 
 extension TimerViewController: TimerDelegate {
@@ -57,10 +130,12 @@ extension TimerViewController: TimerDelegate {
     
     func timerCompleted() {
         updateViews()
+        setupAlertController()
     }
     
     func timerStopped() {
         updateViews()
+        cancelNotification()
     }
     
 }
